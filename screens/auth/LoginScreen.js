@@ -59,9 +59,6 @@ export default function LoginScreen({ navigation }) {
   }, []);
 
   const submitForm = () => {
-    if (!state.email && !state.password) {
-      return;
-    }
     keyboardHide();
     navigation.navigate("Home", state);
   };
@@ -166,6 +163,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 36,
+
     fontWeight: "500",
     color: "#212121",
     fontFamily: "Roboto-Regular",
@@ -179,10 +177,11 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    padding: 16,
+    padding: 12,
     borderRadius: 5,
     borderWidth: 1,
     fontSize: 16,
+    lineHeight: 0.8,
     fontFamily: "Roboto-Regular",
     backgroundColor: "#F6F6F6",
     borderColor: "#E8E8E8",
@@ -201,6 +200,7 @@ const styles = StyleSheet.create({
   },
   showPass: {
     fontSize: 16,
+    lineHeight: 19,
     fontFamily: "Roboto-Regular",
     color: "#1B4371",
   },
@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
   },
   btnTitle: {
     fontSize: 16,
+    lineHeight: 19,
     fontFamily: "Roboto-Regular",
     ...Platform.select({
       ios: {
@@ -245,6 +246,7 @@ const styles = StyleSheet.create({
   },
   regTitle: {
     fontSize: 16,
+    lineHeight: 19,
     fontFamily: "Roboto-Regular",
     textAlign: "center",
     color: "#1B4371",

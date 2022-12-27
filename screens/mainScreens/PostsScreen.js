@@ -13,8 +13,8 @@ import {
 const profile = {
   name: "Nataliaa Romanova",
   email: "email@example.com",
-  avatar: "../../assets/images/avatar.png",
 };
+
 const ava = require("../../assets/images/avatar.png");
 const image = require("../../assets/images/postImg1.png");
 const commentPin = require("../../assets/icon/comment-pin.png");
@@ -22,14 +22,14 @@ const mapPin = require("../../assets/icon/map-pin.png");
 
 export const PostsScreen = ({ navigation }) => {
   const [dimensions, setdimensions] = useState(
-    Dimensions.get("window").width - 20 * 2
+    Dimensions.get("window").width - 16 * 2
   );
 
-  const { name, email, avatar } = profile;
+  const { name, email } = profile;
 
   useEffect(() => {
     const onChange = () => {
-      const width = Dimensions.get("window").width - 20 * 2;
+      const width = Dimensions.get("window").width - 16 * 2;
       console.log(width);
       setdimensions(width);
     };
@@ -41,7 +41,7 @@ export const PostsScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={{ ...styles.container, width: dimensions + 20 * 2 }}>
+    <View style={{ ...styles.container, width: dimensions + 16 * 2 }}>
       <View style={styles.userThmb}>
         <Image style={styles.avatar} source={ava} />
         <View style={{ justifyContent: "center" }}>
@@ -85,11 +85,13 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 15,
+    lineHeight: 19,
     color: "#212121",
     fontFamily: "Roboto-Bold",
   },
   email: {
     fontSize: 11,
+    lineHeight: 19,
     color: "#212121",
     fontFamily: "Roboto-Regular",
   },
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
   postTitle: {
     marginBottom: 9,
     fontSize: 16,
+    lineHeight: 19,
     fontWeight: "400",
     color: "#212121",
     fontFamily: "Roboto-Regular",
@@ -126,6 +129,7 @@ const styles = StyleSheet.create({
   },
   postCommentNumber: {
     fontSize: 16,
+    lineHeight: 19,
     fontWeight: "400",
     color: "#BDBDBD",
     fontFamily: "Roboto-Regular",
@@ -138,6 +142,7 @@ const styles = StyleSheet.create({
   },
   postLocationTitle: {
     fontSize: 16,
+    lineHeight: 19,
     fontWeight: "400",
     color: "#212121",
     fontFamily: "Roboto-Regular",

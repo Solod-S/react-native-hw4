@@ -1,12 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Button, TouchableOpacity, Image } from "react-native";
+import { TouchableOpacity, Image } from "react-native";
 
 import screens from "../screens";
 const { CreateScreen, PostsScreen, ProfileScreen } = screens;
 
 const backIcon = require("../assets/icon/arrow-left.png");
+const LogOutIcon = require("../assets/icon/log-out.png");
 
 const MainTab = createBottomTabNavigator();
 
@@ -26,6 +27,14 @@ export default function Home({ navigation, route }) {
               size={focused ? 44 : 34}
               color={focused ? "orange" : color}
             />
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={() => navigation.navigate("Login")}
+            >
+              <Image source={LogOutIcon} style={{ marginRight: 16 }} />
+            </TouchableOpacity>
           ),
         }}
         component={PostsScreen}
@@ -48,6 +57,7 @@ export default function Home({ navigation, route }) {
           headerLeft: () => (
             <TouchableOpacity
               activeOpacity={0.6}
+              style={{ padding: 10 }}
               onPress={() => navigation.navigate("PostsScreen")}
             >
               <Image source={backIcon} style={{ marginLeft: 16 }} />
