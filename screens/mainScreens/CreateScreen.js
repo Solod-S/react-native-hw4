@@ -23,7 +23,7 @@ const initialState = {
 };
 const camera = require("../../assets/icon/camera.png");
 
-export const CreateScreen = ({ navigation }) => {
+export default function CreateScreen({ navigation }) {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [post, setPost] = useState(initialState);
   const [dimensions, setdimensions] = useState(
@@ -125,17 +125,19 @@ export const CreateScreen = ({ navigation }) => {
           <Text style={styles.btnTitle}>Опубликовать</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          activeOpacity={0.6}
-          style={styles.dellBtn}
-          onPress={() => submitForm()}
-        >
-          <MaterialIcons name="delete-outline" size={24} color="#DADADA" />
-        </TouchableOpacity>
+        {!isKeyboardVisible && (
+          <TouchableOpacity
+            activeOpacity={0.6}
+            style={styles.dellBtn}
+            onPress={() => submitForm()}
+          >
+            <MaterialIcons name="delete-outline" size={24} color="#DADADA" />
+          </TouchableOpacity>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -233,5 +235,3 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
-
-export default CreateScreen;

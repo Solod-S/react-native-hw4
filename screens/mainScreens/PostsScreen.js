@@ -20,7 +20,7 @@ const image = require("../../assets/images/postImg1.png");
 const commentPin = require("../../assets/icon/comment-pin.png");
 const mapPin = require("../../assets/icon/map-pin.png");
 
-export const PostsScreen = ({ navigation }) => {
+export default function PostsScreen({ navigation }) {
   const [dimensions, setdimensions] = useState(
     Dimensions.get("window").width - 16 * 2
   );
@@ -49,7 +49,11 @@ export const PostsScreen = ({ navigation }) => {
           <Text style={styles.email}>{email}</Text>
         </View>
       </View>
-      <TouchableOpacity activeOpacity={0.6} style={styles.post}>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        style={styles.post}
+        onPress={() => navigation.navigate("Coments")}
+      >
         <Image source={image} style={styles.postImg} />
         <Text style={styles.postTitle}>Лес</Text>
         <View style={styles.postFooter}>
@@ -67,7 +71,7 @@ export const PostsScreen = ({ navigation }) => {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -149,5 +153,3 @@ const styles = StyleSheet.create({
     textDecoration: "underlin",
   },
 });
-
-export default PostsScreen;

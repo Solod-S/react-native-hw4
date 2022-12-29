@@ -1,19 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+// import { MaterialIcons } from "@expo/vector-icons";
+// import { Button, TouchableOpacity, Image } from "react-native";
+
 import Home from "./screens/Home";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Button, TouchableOpacity, Image } from "react-native";
-
 import screens from "./screens";
-const {
-  LoginScreen,
-  RegistrationScreen,
-  CreateScreen,
-  PostsScreen,
-  ProfileScreen,
-} = screens;
-
-const backIcon = require("./assets/icon/arrow-left.png");
+const { LoginScreen, RegistrationScreen, ComentsScreen } = screens;
 
 const GeneralStack = createStackNavigator();
 // const MainStack = createStackNavigator();
@@ -37,6 +30,11 @@ const useRoute = () => {
           name="Home"
           component={Home}
         ></GeneralStack.Screen>
+        <GeneralStack.Screen
+          options={{ title: "Комментарии", headerTitleAlign: "center" }}
+          name="Coments"
+          component={ComentsScreen}
+        />
       </GeneralStack.Navigator>
       {/* <MainStack.Navigator initialRouteName="Home">
         <MainStack.Screen

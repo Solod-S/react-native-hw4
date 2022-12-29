@@ -1,5 +1,10 @@
 import { LoginScreen, RegistrationScreen } from "./auth";
-import { CreateScreen, PostsScreen, ProfileScreen } from "./mainScreens";
+import {
+  CreateScreen,
+  PostsScreen,
+  ProfileScreen,
+  ComentsScreen,
+} from "./mainScreens";
 
 const screens = {
   LoginScreen,
@@ -7,5 +12,6 @@ const screens = {
   CreateScreen,
   PostsScreen,
   ProfileScreen,
+  ComentsScreen,
 };
 export default screens;
