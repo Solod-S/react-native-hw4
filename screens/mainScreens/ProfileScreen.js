@@ -1,21 +1,21 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
 import {
   Text,
   View,
   StyleSheet,
   ImageBackground,
-  TouchableWithoutFeedback,
   Image,
   Dimensions,
   TouchableOpacity,
-  TextInput,
+  FlatList,
+  ScrollView,
 } from "react-native";
 
+//components
+import ProfilePost from "../../components/ProfilePost/ProfilePost";
+
 //data
-import posts from "../../assets/data/posts.json";
+import posts from "../../assets/data/posts.js";
 
 //images
 const avatar = require("../../assets/images/avatar.png");
@@ -23,25 +23,17 @@ const imageBG = require("../../assets/images/screenBg.jpg");
 const image = require("../../assets/images/postImg1.png");
 
 //icons
-const commentPin = require("../../assets/icon/comment-pin.png");
-const lokePin = require("../../assets/icon/like.png");
-const mapPin = require("../../assets/icon/map-pin.png");
 const LogOutIcon = require("../../assets/icon/log-out.png");
 
 export default function ProfileScreen({ navigation }) {
   const [dimensions, setdimensions] = useState(
     Dimensions.get("window").width - 16 * 2
   );
-  const [screenHeight, setScreenHeight] = useState(
-    Dimensions.get("window").height
-  );
 
   useEffect(() => {
     const onChange = () => {
-      const height = Dimensions.get("window").height;
       const width = Dimensions.get("window").width - 16 * 2;
       setdimensions(width);
-      setScreenHeight(height);
     };
     const dimensionsHandler = Dimensions.addEventListener("change", onChange);
 
@@ -108,106 +100,49 @@ export default function ProfileScreen({ navigation }) {
             Natali Romanova
           </Text>
         </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={styles.post}
-              onPress={() => navigation.navigate("Coments")}
-            >
-              <Image source={image} style={styles.postImg} />
-              <Text style={styles.postTitle}>Лес</Text>
-              <View style={styles.postFooter}>
-                <View style={styles.postCommentThmb}>
-                  <Image style={styles.postCommentIcon} source={commentPin} />
-                  <Text style={styles.postCommentNumber}>2</Text>
-                </View>
-                <View style={styles.postLikeThmb}>
-                  <Image style={styles.postLikeIcon} source={lokePin} />
-                  <Text style={styles.postLikeNumber}>11</Text>
-                </View>
-                <View style={styles.postLocationThmb}>
-                  <Image style={styles.postLocationIcon} source={mapPin} />
-                  <Text style={styles.postLocationTitle}>Ukraine</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={styles.post}
-              onPress={() => navigation.navigate("Coments")}
-            >
-              <Image source={image} style={styles.postImg} />
-              <Text style={styles.postTitle}>Лес</Text>
-              <View style={styles.postFooter}>
-                <View style={styles.postCommentThmb}>
-                  <Image style={styles.postCommentIcon} source={commentPin} />
-                  <Text style={styles.postCommentNumber}>222</Text>
-                </View>
-                <View style={styles.postLikeThmb}>
-                  <Image style={styles.postLikeIcon} source={lokePin} />
-                  <Text style={styles.postLikeNumber}>1234</Text>
-                </View>
-                <View style={styles.postLocationThmb}>
-                  <Image style={styles.postLocationIcon} source={mapPin} />
-                  <Text style={styles.postLocationTitle}>Ukraine</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={styles.post}
-              onPress={() => navigation.navigate("Coments")}
-            >
-              <Image source={image} style={styles.postImg} />
-              <Text style={styles.postTitle}>Лес</Text>
-              <View style={styles.postFooter}>
-                <View style={styles.postCommentThmb}>
-                  <Image style={styles.postCommentIcon} source={commentPin} />
-                  <Text style={styles.postCommentNumber}>12</Text>
-                </View>
-                <View style={styles.postLikeThmb}>
-                  <Image style={styles.postLikeIcon} source={lokePin} />
-                  <Text style={styles.postLikeNumber}>0</Text>
-                </View>
-                <View style={styles.postLocationThmb}>
-                  <Image style={styles.postLocationIcon} source={mapPin} />
-                  <Text style={styles.postLocationTitle}>Ukraine</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={styles.post}
-              onPress={() => navigation.navigate("Coments")}
-            >
-              <Image
-                source={image}
-                style={{ ...styles.postImg, width: dimensions }}
+        {/* <FlatList
+          style={{ width: dimensions }}
+          data={posts}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, indx) => indx.toString()}
+          renderItem={({ item }) => {
+            const { id, image, title, comments, location, like } = item;
+            return (
+              <ProfilePost
+                navigation={navigation}
+                key={id}
+                title={title}
+                image={image}
+                coments={comments}
+                location={location}
+                like={like}
               />
-              <Text style={styles.postTitle}>Лес</Text>
-              <View style={styles.postFooter}>
-                <View style={styles.postCommentThmb}>
-                  <Image style={styles.postCommentIcon} source={commentPin} />
-                  <Text style={styles.postCommentNumber}>555</Text>
-                </View>
-                <View style={styles.postLikeThmb}>
-                  <Image style={styles.postLikeIcon} source={lokePin} />
-                  <Text style={styles.postLikeNumber}>5555</Text>
-                </View>
-                <View style={styles.postLocationThmb}>
-                  <Image style={styles.postLocationIcon} source={mapPin} />
-                  <Text style={styles.postLocationTitle}>Ukraine</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </View>
+            );
+          }}
+        /> */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ width: dimensions }}
+        >
+          {posts &&
+            posts.map(({ id, image, title, comments, location, like }) => (
+              <ProfilePost
+                navigation={navigation}
+                key={id}
+                title={title}
+                image={image}
+                coments={comments}
+                location={location}
+                like={like}
+              />
+            ))}
         </ScrollView>
       </View>
     </ImageBackground>
   );
 }
 
+//styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

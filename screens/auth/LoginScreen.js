@@ -14,13 +14,18 @@ import {
   Dimensions,
 } from "react-native";
 
-import useRoute from "../../router";
+// import useRoute from "../../router";
 
-const imageBG = require("../../assets/images/screenBg.jpg");
+//stateSchema
 const initialState = {
   email: "",
   password: "",
 };
+
+//images
+const imageBG = require("../../assets/images/screenBg.jpg");
+
+
 
 export default function LoginScreen({ navigation }) {
   const [showPass, setShowPass] = useState(false);
@@ -147,6 +152,7 @@ export default function LoginScreen({ navigation }) {
   );
 }
 
+//styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

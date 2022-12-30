@@ -5,7 +5,6 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   TouchableOpacity,
   Platform,
   KeyboardAvoidingView,
@@ -14,12 +13,16 @@ import {
   Dimensions,
 } from "react-native";
 
-const image = require("../../assets/images/screenBg.jpg");
+//stateSchema
 const initialState = {
   email: "",
   password: "",
   login: "",
 };
+
+//images
+const image = require("../../assets/images/screenBg.jpg");
+
 export default function RegistrationScreen({ navigation }) {
   const [showPass, setShowPass] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -38,13 +41,13 @@ export default function RegistrationScreen({ navigation }) {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {
-        setKeyboardVisible(true); // or some other action
+        setKeyboardVisible(true);
       }
     );
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
       () => {
-        setKeyboardVisible(false); // or some other action
+        setKeyboardVisible(false);
       }
     );
 
@@ -162,10 +165,6 @@ export default function RegistrationScreen({ navigation }) {
                   >
                     <Text style={styles.regTitle}>Уже есть аккаунт? Войти</Text>
                   </TouchableOpacity>
-                  {/* <Button
-                    title="Зарегистрироваться"
-                    onPress={() => navigation.navigate({ name: "Login" })}
-                  /> */}
                 </>
               )}
             </View>
@@ -176,6 +175,7 @@ export default function RegistrationScreen({ navigation }) {
   );
 }
 
+//styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

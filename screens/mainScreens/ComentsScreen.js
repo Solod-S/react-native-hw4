@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
@@ -17,9 +16,12 @@ import {
 
 import takeDate from "../../utils/takeDate";
 
+//stateSchema
 const initialState = {
   comment: "",
 };
+
+//images
 const img = require("../../assets/images/postImg1.png");
 const ava1 = require("../../assets/images/avatar2.jpg");
 const ava2 = require("../../assets/images/avatar.png");
@@ -183,6 +185,7 @@ export default function CommentsScreen({ navigation }) {
   );
 }
 
+//styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

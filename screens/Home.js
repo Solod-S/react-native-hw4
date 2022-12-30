@@ -1,22 +1,32 @@
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity, Image } from "react-native";
 
+//screens
 import screens from "../screens";
 const { CreateScreen, PostsScreen, ProfileScreen } = screens;
 
+//icons
 const backIcon = require("../assets/icon/arrow-left.png");
 const LogOutIcon = require("../assets/icon/log-out.png");
 
 const MainTab = createBottomTabNavigator();
 
 export default function Home({ navigation, route }) {
-  // console.log(`данные`, route.params);
   return (
-    <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
+    <MainTab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: [
+          {
+            display: "flex",
+          },
+          null,
+        ],
+      }}
+    >
       <MainTab.Screen
-        syyle={{ display: "none" }}
+        // syyle={{ display: "none" }}
         name="PostsScreen"
         options={{
           title: "Публикации",

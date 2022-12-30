@@ -1,15 +1,13 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import {
   Text,
   View,
   StyleSheet,
-  ImageBackground,
   Image,
   Dimensions,
-  TouchableOpacity,
-  FlatList,
   ScrollView,
+  FlatList,
+  TouchableOpacity,
 } from "react-native";
 
 const profile = {
@@ -17,14 +15,14 @@ const profile = {
   email: "email@example.com",
 };
 
+//components
 import MainPost from "../../components/MainPost/MainPost";
-//data
-import posts from "../../assets/data/posts.json";
 
+//data
+import posts from "../../assets/data/posts.js";
+
+//images
 const ava = require("../../assets/images/avatar.png");
-const image = require("../../assets/images/postImg1.png");
-const commentPin = require("../../assets/icon/comment-pin.png");
-const mapPin = require("../../assets/icon/map-pin.png");
 
 export default function PostsScreen({ navigation }) {
   const [dimensions, setdimensions] = useState(
@@ -55,43 +53,25 @@ export default function PostsScreen({ navigation }) {
           <Text style={styles.email}>{email}</Text>
         </View>
       </View>
-      {/* <FlatList
+      <FlatList
         data={posts}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item, indx) => indx.toString()}
-        renderItem={({ item }) => (
-          <View
-            style={{
-              marginBottom: 10,
-            }}
-          >
-            <Image
-              source={{ uri: item.image }}
-              style={{
-                marginBottom: 8,
-
-                height: 240,
-                borderRadius: 8,
-              }}
+        renderItem={({ item }) => {
+          const { id, image, title, comments, location } = item;
+          return (
+            <MainPost
+              navigation={navigation}
+              key={id}
+              title={title}
+              image={image}
+              coments={comments}
+              location={location}
             />
-            <View>
-              <Text style={styles.title}>{item.title}</Text>
-              <View style={styles.nested}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Comments")}
-                >
-                  <Image
-                    source={require("../../assets/icon/comment-pin.png")}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate("Map")}>
-                  <Image source={require("../../assets/icon/map-pin.png")} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        )}
-      /> */}
-      <ScrollView showsVerticalScrollIndicator={false}>
+          );
+        }}
+      />
+      {/* <ScrollView showsVerticalScrollIndicator={false}>
         {posts &&
           posts.map(({ id, image, title, comments, location }) => (
             <MainPost
@@ -103,31 +83,12 @@ export default function PostsScreen({ navigation }) {
               location={location}
             />
           ))}
-      </ScrollView>
-      {/* <TouchableOpacity
-        activeOpacity={0.6}
-        style={styles.post}
-        onPress={() => navigation.navigate("Coments")}
-      >
-        <Image source={image} style={styles.postImg} />
-        <Text style={styles.postTitle}>Лес</Text>
-        <View style={styles.postFooter}>
-          <View style={styles.postCommentThmb}>
-            <Image style={styles.postCommentIcon} source={commentPin} />
-            <Text style={styles.postCommentNumber}>0</Text>
-          </View>
-          <View style={styles.postLocationThmb}>
-            <Image style={styles.postLocationIcon} source={mapPin} />
-            <Text style={styles.postLocationTitle}>
-              Ivano-Frankivs'k Region, Ukraine
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity> */}
+      </ScrollView> */}
     </View>
   );
 }
 
+//styles
 const styles = StyleSheet.create({
   container: {
     paddingTop: 32,
@@ -206,17 +167,5 @@ const styles = StyleSheet.create({
     color: "#212121",
     fontFamily: "Roboto-Regular",
     textDecoration: "underlin",
-  },
-  nested: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-
-    marginBottom: 35,
-  },
-  title: {
-    marginBottom: 8,
-
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
   },
 });

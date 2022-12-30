@@ -1,11 +1,9 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   Text,
   View,
   StyleSheet,
-  ImageBackground,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Image,
@@ -16,11 +14,14 @@ import {
   Platform,
 } from "react-native";
 
+//stateSchema
 const initialState = {
   photo: "",
   name: "",
   location: "",
 };
+
+//icons
 const camera = require("../../assets/icon/camera.png");
 
 export default function CreateScreen({ navigation }) {
@@ -40,14 +41,14 @@ export default function CreateScreen({ navigation }) {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {
-        setKeyboardVisible(true); // or some other action
+        setKeyboardVisible(true);
       }
     );
 
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
       () => {
-        setKeyboardVisible(false); // or some other action
+        setKeyboardVisible(false);
       }
     );
 
@@ -139,6 +140,7 @@ export default function CreateScreen({ navigation }) {
   );
 }
 
+//styles
 const styles = StyleSheet.create({
   container: {
     paddingTop: 32,
