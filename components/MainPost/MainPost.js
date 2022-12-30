@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
 const commentPin = require("../../assets/icon/comment-pin.png");
@@ -10,14 +11,15 @@ export default function MainPost({
   coments,
   location,
 }) {
-  const postIpngmg = require("../../assets/images/postImg1.png");
+  console.log(image);
+
   return (
     <TouchableOpacity
       activeOpacity={0.6}
       style={styles.post}
       onPress={() => navigation.navigate("Coments")}
     >
-      <Image source={postIpngmg} style={styles.postImg} />
+      <Image source={require(image)} style={styles.postImg} />
       <Text style={styles.postTitle}>{title}</Text>
       <View style={styles.postFooter}>
         <View style={styles.postCommentThmb}>
