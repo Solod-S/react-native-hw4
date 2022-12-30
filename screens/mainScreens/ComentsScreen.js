@@ -1,13 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-// import {  } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
 import {
   Text,
   View,
   StyleSheet,
-  ImageBackground,
-  TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Image,
   Dimensions,
@@ -15,13 +13,13 @@ import {
   TextInput,
   Keyboard,
   Platform,
-  ScrollView,
 } from "react-native";
+
+import takeDate from "../../utils/takeDate";
 
 const initialState = {
   comment: "",
 };
-const sendIcon = require("../../assets/icon/send.png");
 const img = require("../../assets/images/postImg1.png");
 const ava1 = require("../../assets/images/avatar2.jpg");
 const ava2 = require("../../assets/images/avatar.png");
@@ -47,14 +45,14 @@ export default function CommentsScreen({ navigation }) {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {
-        setKeyboardVisible(true); // or some other action
+        setKeyboardVisible(true);
       }
     );
 
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
       () => {
-        setKeyboardVisible(false); // or some other action
+        setKeyboardVisible(false);
       }
     );
 
@@ -65,146 +63,122 @@ export default function CommentsScreen({ navigation }) {
     };
   }, []);
 
-  const keyboardHide = () => {
-    setKeyboardVisible(false);
-    Keyboard.dismiss();
-  };
-
   const submitForm = () => {
-    const takeDate = () => {
-      let today = new Date();
-      let dd = String(today.getDate()).padStart(2, "0");
-      let mm = String(today.getMonth() + 1).padStart(2, "0");
-      let yyyy = today.getFullYear();
-      let hh = today.getHours() + ":" + today.getMinutes();
-      today = mm + "/" + dd + "/" + yyyy + " | " + hh;
-      return today;
-    };
-    const commentDate = takeDate();
-
     console.log("Text:", comment.comment, "Date:", takeDate());
     setComment(initialState);
-    navigation.navigate("PostsScreen", comment);
+    navigation.navigate("PostsScreen");
   };
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={keyboardHide}>
-        <View style={{ maxWidth: dimensions }}>
-          {!isKeyboardVisible && (
-            <>
-              <View style={styles.postImgThmb}>
-                <Image source={img} style={styles.postImg} />
-              </View>
-            </>
-          )}
-
-          <ScrollView style={{ ...styles.commentsList }}>
-            <View
-              // style={{ ...styles.comment, maxWidth: dimensions - 50 }}
-              style={{ ...styles.comment }}
-            >
-              <View style={styles.imgThmb}>
-                <Image source={ava1} style={styles.img} />
-              </View>
-              <View
-                style={{ ...styles.commentThmb, maxWidth: dimensions - 40 }}
-              >
-                <Text style={styles.text}>
-                  Really love your most recent photo. I’ve been trying to
-                  capture the same thing for a few months and would love some
-                  tips!
-                </Text>
-                <Text style={styles.date}>09 июня, 2020 | 08:40</Text>
-              </View>
+      <View style={{ maxWidth: dimensions }}>
+        {!isKeyboardVisible && (
+          <>
+            <View style={styles.postImgThmb}>
+              <Image source={img} style={styles.postImg} />
             </View>
-
-            <View
-              style={{
-                ...styles.comment,
-                ...styles.commentRevers,
-              }}
-            >
-              <View style={{ ...styles.imgThmb, ...styles.imgThmbReverse }}>
-                <Image source={ava2} style={styles.img} />
-              </View>
-              <View
-                style={{
-                  ...styles.commentThmb,
-                  ...styles.commentThmbRevers,
-                  maxWidth: dimensions - 40,
-                }}
-              >
-                <Text style={styles.text}>
-                  A fast 50mm like f1.8 would help with the bokeh. I’ve been
-                  using primes as they tend to get a bit sharper images.
-                </Text>
-                <Text style={{ ...styles.date, ...styles.dateReverse }}>
-                  09 июня, 2020 | 09:14
-                </Text>
-              </View>
+          </>
+        )}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ ...styles.commentsList }}
+        >
+          <View key="1" style={{ ...styles.comment, flexGrow: 1 }}>
+            <View style={styles.imgThmb}>
+              <Image source={ava1} style={styles.img} />
             </View>
-
-            <View
-              style={{
-                ...styles.comment,
-                ...styles.commentRevers,
-              }}
-            >
-              <View style={{ ...styles.imgThmb, ...styles.imgThmbReverse }}>
-                <Image source={ava2} style={styles.img} />
-              </View>
-              <View
-                style={{
-                  ...styles.commentThmb,
-                  ...styles.commentThmbRevers,
-                  maxWidth: dimensions - 40,
-                }}
-              >
-                <Text style={styles.text}>
-                  A fast 50mm like f1.8 would help with the bokeh. I’ve been
-                  using primes as they tend to get a bit sharper images.
-                </Text>
-                <Text style={{ ...styles.date, ...styles.dateReverse }}>
-                  09 июня, 2020 | 09:14
-                </Text>
-              </View>
+            <View style={{ ...styles.commentThmb, maxWidth: dimensions - 40 }}>
+              <Text style={styles.text}>
+                Really love your most recent photo. I’ve been trying to capture
+                the same thing for a few months and would love some tips!
+              </Text>
+              <Text style={styles.date}>09 июня, 2020 | 08:40</Text>
             </View>
-          </ScrollView>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : ""}
+          </View>
+          <View
+            key="2"
+            style={{
+              ...styles.comment,
+              ...styles.commentRevers,
+            }}
           >
+            <View style={{ ...styles.imgThmb, ...styles.imgThmbReverse }}>
+              <Image source={ava2} style={styles.img} />
+            </View>
             <View
               style={{
-                ...styles.form,
-                paddingBottom: isKeyboardVisible ? 10 : 0,
+                ...styles.commentThmb,
+                ...styles.commentThmbRevers,
+                maxWidth: dimensions - 40,
               }}
             >
-              <View style={{ ...styles.inputThmb, marginTop: "auto" }}>
-                <TextInput
-                  placeholder="Комментировать..."
-                  value={comment.comment}
-                  style={styles.input}
-                  textAlign={"left"}
-                  onFocus={() => setKeyboardVisible(true)}
-                  onChangeText={(value) =>
-                    setComment((prevState) => ({
-                      ...prevState,
-                      comment: value,
-                    }))
-                  }
-                />
-                <TouchableOpacity
-                  activeOpacity={0.6}
-                  style={styles.subBtn}
-                  onPress={() => submitForm()}
-                >
-                  <AntDesign name="arrowup" size={14} color="white" />
-                </TouchableOpacity>
-              </View>
+              <Text style={styles.text}>
+                A fast 50mm like f1.8 would help with the bokeh. I’ve been using
+                primes as they tend to get a bit sharper images.
+              </Text>
+              <Text style={{ ...styles.date, ...styles.dateReverse }}>
+                09 июня, 2020 | 09:14
+              </Text>
             </View>
-          </KeyboardAvoidingView>
-        </View>
-      </TouchableWithoutFeedback>
+          </View>
+          <View
+            key="3"
+            style={{
+              ...styles.comment,
+              ...styles.commentRevers,
+            }}
+          >
+            <View style={{ ...styles.imgThmb, ...styles.imgThmbReverse }}>
+              <Image source={ava2} style={styles.img} />
+            </View>
+            <View
+              style={{
+                ...styles.commentThmb,
+                ...styles.commentThmbRevers,
+                maxWidth: dimensions - 40,
+              }}
+            >
+              <Text style={styles.text}>
+                A fast 50mm like f1.8 would help with the bokeh. I’ve been using
+                primes as they tend to get a bit sharper images.
+              </Text>
+              <Text style={{ ...styles.date, ...styles.dateReverse }}>
+                09 июня, 2020 | 09:14
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : ""}>
+          <View
+            style={{
+              ...styles.form,
+              paddingBottom: isKeyboardVisible ? 10 : 0,
+            }}
+          >
+            <View style={{ ...styles.inputThmb, marginTop: "auto" }}>
+              <TextInput
+                placeholder="Комментировать..."
+                value={comment.comment}
+                style={styles.input}
+                textAlign={"left"}
+                onFocus={() => setKeyboardVisible(true)}
+                onChangeText={(value) =>
+                  setComment((prevState) => ({
+                    ...prevState,
+                    comment: value,
+                  }))
+                }
+              />
+              <TouchableOpacity
+                activeOpacity={0.6}
+                style={styles.subBtn}
+                onPress={() => submitForm()}
+              >
+                <AntDesign name="arrowup" size={14} color="white" />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </View>
     </View>
   );
 }
@@ -242,7 +216,6 @@ const styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 15,
   },
-
   img: {
     width: 28,
     height: 28,

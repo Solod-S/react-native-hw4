@@ -16,7 +16,7 @@ import {
 
 import useRoute from "../../router";
 
-const image = require("../../assets/images/screenBg.jpg");
+const imageBG = require("../../assets/images/screenBg.jpg");
 const initialState = {
   email: "",
   password: "",
@@ -77,7 +77,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
-        <ImageBackground source={image} style={styles.image}>
+        <ImageBackground source={imageBG} style={styles.image}>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : ""}
           >
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 36,
-
     fontWeight: "500",
     color: "#212121",
     fontFamily: "Roboto-Regular",

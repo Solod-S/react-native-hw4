@@ -8,12 +8,18 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  FlatList,
+  ScrollView,
 } from "react-native";
 
 const profile = {
   name: "Nataliaa Romanova",
   email: "email@example.com",
 };
+
+import MainPost from "../../components/MainPost/MainPost";
+//data
+import posts from "../../assets/data/posts.json";
 
 const ava = require("../../assets/images/avatar.png");
 const image = require("../../assets/images/postImg1.png");
@@ -49,7 +55,56 @@ export default function PostsScreen({ navigation }) {
           <Text style={styles.email}>{email}</Text>
         </View>
       </View>
-      <TouchableOpacity
+      {/* <FlatList
+        data={posts}
+        keyExtractor={(item, indx) => indx.toString()}
+        renderItem={({ item }) => (
+          <View
+            style={{
+              marginBottom: 10,
+            }}
+          >
+            <Image
+              source={{ uri: item.image }}
+              style={{
+                marginBottom: 8,
+
+                height: 240,
+                borderRadius: 8,
+              }}
+            />
+            <View>
+              <Text style={styles.title}>{item.title}</Text>
+              <View style={styles.nested}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Comments")}
+                >
+                  <Image
+                    source={require("../../assets/icon/comment-pin.png")}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Map")}>
+                  <Image source={require("../../assets/icon/map-pin.png")} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        )}
+      /> */}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {posts &&
+          posts.map(({ id, image, title, comments, location }) => (
+            <MainPost
+              navigation={navigation}
+              key={id}
+              title={title}
+              image={image}
+              coments={comments}
+              location={location}
+            />
+          ))}
+      </ScrollView>
+      {/* <TouchableOpacity
         activeOpacity={0.6}
         style={styles.post}
         onPress={() => navigation.navigate("Coments")}
@@ -68,7 +123,7 @@ export default function PostsScreen({ navigation }) {
             </Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
@@ -151,5 +206,17 @@ const styles = StyleSheet.create({
     color: "#212121",
     fontFamily: "Roboto-Regular",
     textDecoration: "underlin",
+  },
+  nested: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+
+    marginBottom: 35,
+  },
+  title: {
+    marginBottom: 8,
+
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
   },
 });

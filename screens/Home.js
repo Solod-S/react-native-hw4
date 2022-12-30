@@ -69,7 +69,7 @@ export default function Home({ navigation, route }) {
         name="ProfileScreen"
         options={{
           headerShown: false,
-          tabBarVisible: false,
+          tabBarVisible: true,
           tabBarIcon: ({ focused, size, color }) => (
             <MaterialIcons
               name="account-circle"
